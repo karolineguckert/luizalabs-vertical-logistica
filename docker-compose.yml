@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  #Mongo properties
+  mongo:
+    image: mongo
+    container_name: mongo_management2
+
+    ports:
+      - 27017:27017
+
+    restart: always
+
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${PASSWORD}
