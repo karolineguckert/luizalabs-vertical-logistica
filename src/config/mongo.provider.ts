@@ -1,8 +1,6 @@
-import { Injectable } from '@nestjs/common';
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-@Injectable()
-class MongoService {
+class MongoProvider {
 
   constructor() {
     dotenv.config();
@@ -13,4 +11,9 @@ class MongoService {
   }
 }
 
-export default MongoService;
+export const mongoProviders = [
+  {
+    provide: 'MONGO_CONNECTION',
+    useFactory: (): Promise<typeof mongoose> => new MongoProvider().createMongoConnection(),
+  },
+];

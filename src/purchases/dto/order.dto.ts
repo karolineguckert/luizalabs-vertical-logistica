@@ -1,6 +1,6 @@
 import Product from "./product.dto";
 
-class Order {
+export class Order {
     private order_id: number;
     private total: number;
     private date: string;
