@@ -22,24 +22,7 @@ class PurchaseBusiness {
 
     public async getPurchaseByOrderId (orderId: number){
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByOrderId(orderId);
-
-        if(purchasesFromEntity.length > 0){
-            let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
-
-            purchasesFromEntity.map(purchaseFromEntity => {
-                let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
-
-                if(purchase !== undefined){
-                    let order = purchase.getOrder(purchaseFromEntity.orderId);
-
-                    if(order !== undefined){
-                        order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
-                    }
-                }
-            })
-            return purchasesListObject;
-        }
-        return {};
+        return this.createPurchaseByOrderId(purchasesFromEntity);
     }
 
     /** Method that create a Purchase in database from a auxiliary object
@@ -75,10 +58,10 @@ class PurchaseBusiness {
             })
             return purchasesListObject;
         }
-        return {};
+        return {}; // TODO Adicionar mensagem de feedback
     }
 
-    /** Auxiliary method to create a purchase that is not in the resultant object to return
+    /** Auxiliary method to create the first purchase that is not in the resultant object to return
      *
      * @param purchasesFromEntity is the list of results from dataBase
      * @private
@@ -91,6 +74,26 @@ class PurchaseBusiness {
         return initialPurchase;
     }
 
+    private createPurchaseByOrderId(purchasesFromEntity : PurchaseInterface[]){
+        if(purchasesFromEntity.length > 0){
+            let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
+
+            purchasesFromEntity.map(purchaseFromEntity => {
+                let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
+
+                if(purchase){
+                    let order = purchase.getOrder(purchaseFromEntity.orderId);
+
+                    if(order){
+                        order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
+                    }
+                }
+            })
+            return purchasesListObject;
+        }
+        return {}; // TODO Adicionar mensagem de feedback
+    }
+
     /** Auxiliary method to get the principal Purchase of the list, or create a new if not exists
      *
      * @param purchasesListObject is the list of all purchases
@@ -100,7 +103,7 @@ class PurchaseBusiness {
     private getCurrentPurchaseFromList(purchasesListObject: Purchases, purchaseFromEntity: PurchaseInterface): Purchase {
         let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
 
-        if(purchase === undefined){
+        if(!purchase){
             purchase = purchasesListObject.addPurchase(purchaseFromEntity.userId, purchaseFromEntity.userName);
         }
         return purchase;
@@ -115,7 +118,7 @@ class PurchaseBusiness {
     private getCurrentOrderFromPurchase(purchase: Purchase, purchaseFromEntity: PurchaseInterface): Order {
         let order = purchase.getOrder(purchaseFromEntity.orderId);
 
-        if(order === undefined){
+        if(!order){
             order = purchase.addOrder(purchaseFromEntity.orderId, purchaseFromEntity.date);
         }
         return order;
