@@ -1,7 +1,15 @@
 import mongoose from "mongoose";
-import PurchaseEntity from "./purchase.entity";
 
-export const purchaseSchema = new mongoose.Schema<PurchaseEntity>({
+export default interface PurchaseInterface {
+    userId: number;
+    userName: string;
+    orderId: number;
+    productId: number;
+    value:  number,
+    date: number;
+}
+
+export const PurchaseEntity = new mongoose.Schema<PurchaseInterface>({
     userId: { type: Number, required: true, size: 10 },
     userName: { type: String, required: true, size: 45 },
     orderId: { type: Number, required: true, size: 10 },

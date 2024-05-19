@@ -1,12 +1,8 @@
-import PurchaseEntity from "../entity/purchase";
+import PurchaseInterface from "../entity/purchase.entity";
 import {Model} from "mongoose";
-import {Inject} from "@nestjs/common";
 
 class PurchaseRepository {
-
-    constructor(@Inject('PURCHASE_MODEL')
-                private purchaseModel: Model<PurchaseEntity>) {
-    }
+    constructor(private purchaseModel: Model<PurchaseInterface>) {}
     public async getPurchaseByOrderId (orderId: number) {
         return this.purchaseModel.find({orderId: orderId}).exec();
     }

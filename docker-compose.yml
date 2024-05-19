@@ -8,7 +8,7 @@ services:
     container_name: mongo_management2
 
     ports:
-      - 27017:27017
+      - "27018:27017"
 
     restart: always
 

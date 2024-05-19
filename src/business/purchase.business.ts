@@ -1,28 +1,27 @@
-import PurchaseEntity from "../entity/purchase";
+import PurchaseInterface from "../entity/purchase.entity";
 import Purchase from "../dto/purchase.dto";
 import Purchases from "../dto/purchases.dto";
 import Order from "../dto/order.dto";
 import PurchaseRepository from "../repository/purchase.repository";
+import {Injectable} from "@nestjs/common";
 
+@Injectable()
 class PurchaseBusiness {
-    private purchaseRepository: PurchaseRepository;
 
-    constructor() {
-        this.purchaseRepository = new PurchaseRepository();
-    }
+    constructor(private purchaseRepository: PurchaseRepository) {}
 
     public async getAllPurchases (){
-        const purchasesFromEntity : PurchaseEntity[] = await this.purchaseRepository.getAllPurchases();
+        const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getAllPurchases();
         return this.createPurchaseObject(purchasesFromEntity);
     }
 
     public async getPurchaseByDate (beginDate: number, endDate: number){
-        const purchasesFromEntity : PurchaseEntity[] = await this.purchaseRepository.getPurchaseByDate(beginDate, endDate);
+        const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByDate(beginDate, endDate);
         return this.createPurchaseObject(purchasesFromEntity);
     }
 
     public async getPurchaseByOrderId (orderId: number){
-        const purchasesFromEntity : PurchaseEntity[] = await this.purchaseRepository.getPurchaseByOrderId(orderId);
+        const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByOrderId(orderId);
 
         if(purchasesFromEntity.length > 0){
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
@@ -88,7 +87,7 @@ class PurchaseBusiness {
         return "";
     }
 
-    private createPurchaseObject(purchasesFromEntity : PurchaseEntity[]){
+    private createPurchaseObject(purchasesFromEntity : PurchaseInterface[]){
         if(purchasesFromEntity.length > 0){
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
 
@@ -104,8 +103,8 @@ class PurchaseBusiness {
         return {};
     }
 
-    private createFirstPurchase(purchases : PurchaseEntity[]): Purchase {
-        const firstPurchase: PurchaseEntity = purchases[0];
+    private createFirstPurchase(purchases : PurchaseInterface[]): Purchase {
+        const firstPurchase: PurchaseInterface = purchases[0];
         const initialPurchase: Purchase = new Purchase(firstPurchase.userId, firstPurchase.userName);
         initialPurchase.addOrder(firstPurchase.orderId, firstPurchase.date);
 
@@ -129,7 +128,7 @@ class PurchaseBusiness {
             initialPurchase.date.length > 0;
     }
 
-    private getCurrentPurchaseFromList(purchasesListObject: Purchases, purchaseFromEntity: PurchaseEntity): Purchase {
+    private getCurrentPurchaseFromList(purchasesListObject: Purchases, purchaseFromEntity: PurchaseInterface): Purchase {
         let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
 
         if(purchase === undefined){
@@ -138,7 +137,7 @@ class PurchaseBusiness {
         return purchase;
     }
 
-    private getCurrentOrderFromPurchase(purchase: Purchase, purchaseFromEntity: PurchaseEntity): Order {
+    private getCurrentOrderFromPurchase(purchase: Purchase, purchaseFromEntity: PurchaseInterface): Order {
         let order = purchase.getOrder(purchaseFromEntity.orderId);
 
         if(order === undefined){
