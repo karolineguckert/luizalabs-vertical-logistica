@@ -74,7 +74,9 @@
       "!src/**/*.config.ts",
       "!src/**/*.interface.ts",
       "!src/**/*.enum.ts",
-      "!src/**/*.dto.ts"
+      "!src/**/*.dto.ts",
+      "!src/**/*.entity.ts",
+      "!src/**/*.repository.ts"
     ],
     "coverageDirectory": "coverage",
     "testEnvironment": "node",

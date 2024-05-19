@@ -10,14 +10,14 @@ class PurchaseBusiness {
 
     constructor(private purchaseRepository: PurchaseRepository) {}
 
-    /** Method that returns all a Purchase formatted
+    /** Method that returns all Purchases formatted
      */
     public async getAllPurchases (){
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getAllPurchases();
         return this.createPurchaseObject(purchasesFromEntity);
     }
 
-    /** Method that returns all a Purchase by date formatted
+    /** Method that returns all Purchases formatted by date
      *
      * @param beginDate is the initial date to filter
      * @param endDate is the end date to filter
@@ -30,6 +30,10 @@ class PurchaseBusiness {
         return this.createPurchaseObject(purchasesFromEntity);
     }
 
+    /** Method that return Purchase formatted by orderId
+     *
+     * @param orderId is the orderId of a Purchase
+     */
     public async getPurchaseByOrderId (orderId: number){
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByOrderId(orderId);
         return this.createPurchaseByOrderId(purchasesFromEntity);

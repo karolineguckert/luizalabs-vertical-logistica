@@ -191,4 +191,51 @@ describe("purchaseBusiness", ()=> {
         }
     })
 
+    it("should return purchase by id", async () => {
+        const purchaseRepository = {
+            getPurchaseByOrderId: jest.fn(() => {
+                return purchasePalmer;
+            }),
+        } as unknown as PurchaseRepository;
+
+        const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
+        const result = await purchaseBusiness.getPurchaseByOrderId(753);
+        expect(JSON.stringify(result)).toBe(JSON.stringify(resultOfPalmer));
+    })
+
+    it(`should throw error "No results found!"`, async () => {
+        const purchaseRepository = {
+            getPurchaseByOrderId: jest.fn(() => {
+                return [] as PurchaseInterface[]
+            }),
+        } as unknown as PurchaseRepository;
+
+        const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
+
+        try {
+            await purchaseBusiness.getPurchaseByOrderId(755);
+        } catch (e: any) {
+            expect(e.message).toBe("No results found!");
+        }
+    })
+
+    it("should create a purchase", async () => {
+        const purchaseRepository = {
+            createPurchase: jest.fn(() => {
+                return purchasePalmer;
+            }),
+        } as unknown as PurchaseRepository;
+
+        const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
+        const result = await purchaseBusiness.createPurchase({
+            userId: 70,
+            userName: "Palmer Prosacco",
+            orderId: 753,
+            productId: 3,
+            value: 1836.74,
+            date: 20210308,
+        });
+        expect(result).toBe(purchasePalmer);
+    });
+
 });
