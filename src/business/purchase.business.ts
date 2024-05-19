@@ -42,6 +42,11 @@ class PurchaseBusiness {
         return {};
     }
 
+
+    /** Manipulate the text given from the file to an object to include in database
+     *
+     * @param text is the content information of the original file
+     */
     public async createPurchases (text: string){
         const listOfPurchasesText: string[] = text.split("\n")
 
@@ -56,7 +61,6 @@ class PurchaseBusiness {
                 date: "",
                 completePurchaseText: purchaseText
             }
-
             const userIdExpMatch = this.getExpMatchID(initialPurchase.completePurchaseText);
             initialPurchase = this.manipulatePurchaseObject("userId", initialPurchase, userIdExpMatch);
 
@@ -82,7 +86,7 @@ class PurchaseBusiness {
                     parseFloat(initialPurchase.value.toString()),
                     parseInt(initialPurchase.date)
                 );
-            }
+            } // TODO incluir mensagem de erro
         })
         return "";
     }
@@ -111,6 +115,13 @@ class PurchaseBusiness {
         return initialPurchase;
     }
 
+    /** Auxiliary method to set infos of the next object
+     *
+     * @param fieldName is the name of field in the auxiliary object Purchase
+     * @param initialPurchase is the auxiliary object of Purchase
+     * @param fieldExpMatch is the regex applied to get the current value
+     * @private
+     */
     private manipulatePurchaseObject(fieldName: string, initialPurchase: any, fieldExpMatch: RegExpMatchArray | null): any {
         if(fieldExpMatch){
             const lengthCompletePurchaseText = initialPurchase.completePurchaseText.length;
@@ -120,6 +131,11 @@ class PurchaseBusiness {
         return initialPurchase;
     }
 
+    /** Auxiliary method to validate if all information from the auxiliary Purchase object is filled
+     *
+     * @param initialPurchase is the auxiliary object of Purchase
+     * @private
+     */
     private isAllFieldsWithValue(initialPurchase: any){
         return initialPurchase.userId.length > 0 &&
             initialPurchase.orderId.length > 0 &&
@@ -146,16 +162,31 @@ class PurchaseBusiness {
         return order;
     }
 
+    /** Auxiliary method to get the ID from the next information in the line
+     *
+     * @param auxTextPurchase is the text modified of the content file
+     * @private
+     */
     private getExpMatchID(auxTextPurchase: string){
         const regexID = '([0-9]){10}';
         return auxTextPurchase.match(regexID);
     }
 
+    /** Auxiliary method to get the userName from the next information in the line
+     *
+     * @param auxTextPurchase is the text modified of the content file
+     * @private
+     */
     private getExpMatchUserName(auxTextPurchase: string){
         const regexUserName = '(\\s)+(([A-Za-z]|[\\s]|[.]|[\']){1,45})';
         return auxTextPurchase.match(regexUserName);
     }
 
+    /** Auxiliary method to set the date in the auxiliary object, by getting the next information in the line
+     *
+     * @param initialPurchase is the auxiliary object of Purchase
+     * @private
+     */
     private setDate(initialPurchase: any){
         const lengthCompletePurchaseText = initialPurchase.completePurchaseText.length;
         const sizeOfDate = lengthCompletePurchaseText - 8;
@@ -166,6 +197,11 @@ class PurchaseBusiness {
         return initialPurchase;
     }
 
+    /** Auxiliary method to set the value of the product in the auxiliary object, by getting the next information in the line
+     *
+     * @param initialPurchase is the auxiliary object of Purchase
+     * @private
+     */
     private setValue(initialPurchase: any){
         initialPurchase.value = initialPurchase.completePurchaseText;
         initialPurchase.completePurchaseText = '';

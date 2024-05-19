@@ -7,7 +7,7 @@ class Purchase {
 
     constructor(user_id: number, userName: string) {
         this.user_id = user_id;
-        this.userName = userName;
+        this.userName = userName.trim();
         this.orders = [];
     }
 

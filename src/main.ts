@@ -1,8 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {NestExpressApplication} from "@nestjs/platform-express";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app = await NestFactory.create<NestExpressApplication>(
+      AppModule,
+      {
+        rawBody: true,
+      },
+  );
+  await app.listen(3000); //TODO colocar na env a  port
+    app.useBodyParser('raw', {
+        type: (req) => {
+            // Apply to *all* requests, regardless of content type.
+            return true;
+        },
+    });
 }
 bootstrap();
