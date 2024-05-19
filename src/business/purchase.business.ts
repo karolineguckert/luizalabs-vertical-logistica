@@ -57,6 +57,11 @@ class PurchaseBusiness {
         );
     }
 
+    /** Auxiliary method to create an object from result of dataBase
+     *
+     * @param purchasesFromEntity is the list of results from dataBase
+     * @private
+     */
     private createPurchaseObject(purchasesFromEntity : PurchaseInterface[]){
         if(purchasesFromEntity.length > 0){
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
@@ -73,14 +78,25 @@ class PurchaseBusiness {
         return {};
     }
 
-    private createFirstPurchase(purchases : PurchaseInterface[]): Purchase {
-        const firstPurchase: PurchaseInterface = purchases[0];
+    /** Auxiliary method to create a purchase that is not in the resultant object to return
+     *
+     * @param purchasesFromEntity is the list of results from dataBase
+     * @private
+     */
+    private createFirstPurchase(purchasesFromEntity : PurchaseInterface[]): Purchase {
+        const firstPurchase: PurchaseInterface = purchasesFromEntity[0];
         const initialPurchase: Purchase = new Purchase(firstPurchase.userId, firstPurchase.userName);
         initialPurchase.addOrder(firstPurchase.orderId, firstPurchase.date);
 
         return initialPurchase;
     }
 
+    /** Auxiliary method to get the principal Purchase of the list, or create a new if not exists
+     *
+     * @param purchasesListObject is the list of all purchases
+     * @param purchaseFromEntity is the current purchase
+     * @private
+     */
     private getCurrentPurchaseFromList(purchasesListObject: Purchases, purchaseFromEntity: PurchaseInterface): Purchase {
         let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
 
@@ -90,6 +106,12 @@ class PurchaseBusiness {
         return purchase;
     }
 
+    /** Auxiliary method to get the principal Order from a principal purchase, or create a new if not exists
+     *
+     * @param purchase is the principal purchase from the list
+     * @param purchaseFromEntity is the current purchase
+     * @private
+     */
     private getCurrentOrderFromPurchase(purchase: Purchase, purchaseFromEntity: PurchaseInterface): Order {
         let order = purchase.getOrder(purchaseFromEntity.orderId);
 
