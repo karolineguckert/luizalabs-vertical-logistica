@@ -43,7 +43,7 @@ class ManipulateFileService {
                 await this.purchaseBusiness.createPurchase(initialPurchase);
             }
         })
-        throw new HttpException("Records added successfully!", HttpStatus.OK);
+        return "Records added successfully!";
     }
 
 

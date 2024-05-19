@@ -60,7 +60,7 @@ class PurchaseBusiness {
      * @private
      */
     private createPurchaseObject(purchasesFromEntity : PurchaseInterface[]){
-        if(purchasesFromEntity.length > 0){
+        if(purchasesFromEntity.length > 0) { // TODO: inverter a logica talvez, if len === 0 throw
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
 
             purchasesFromEntity.map(purchaseFromEntity => {
@@ -94,7 +94,7 @@ class PurchaseBusiness {
      * @private
      */
     private createPurchaseByOrderId(purchasesFromEntity : PurchaseInterface[]){
-        if(purchasesFromEntity.length > 0){
+        if(purchasesFromEntity.length > 0){ // TODO: inverter a logica talvez, if len === 0 throw
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
 
             purchasesFromEntity.map(purchaseFromEntity => {

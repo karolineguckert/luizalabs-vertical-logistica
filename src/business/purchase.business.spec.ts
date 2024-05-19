@@ -96,7 +96,7 @@ describe("purchaseBusiness", ()=> {
     };
 
     afterEach(() => {
-        jest.clearAllMocks()
+        jest.clearAllMocks();
     })
 
     it("should return all purchases", async () => {
@@ -114,7 +114,7 @@ describe("purchaseBusiness", ()=> {
     it(`should throw error "No results found!"`, async () => {
         const purchaseRepository = {
             getAllPurchases: jest.fn(() => {
-                return [] as PurchaseInterface[]
+                return [] as PurchaseInterface[];
             }),
         } as unknown as PurchaseRepository;
 
@@ -130,7 +130,7 @@ describe("purchaseBusiness", ()=> {
     it(`should return all purchases in date period equal`, async () => {
         const purchaseRepository = {
             getPurchaseByDate: jest.fn(() => {
-                return purchasePalmer
+                return purchasePalmer;
             }),
         } as unknown as PurchaseRepository;
         const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
@@ -141,7 +141,7 @@ describe("purchaseBusiness", ()=> {
     it(`should return all purchases in date period that initial is lower than final`, async () => {
         const purchaseRepository = {
             getPurchaseByDate: jest.fn(() => {
-                return purchase
+                return purchase;
             }),
         } as unknown as PurchaseRepository;
         const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
@@ -152,7 +152,7 @@ describe("purchaseBusiness", ()=> {
     it(`should return all purchases in date period that initial is lower than final`, async () => {
         const purchaseRepository = {
             getPurchaseByDate: jest.fn(() => {
-                return purchasePalmer
+                return purchasePalmer;
             }),
         } as unknown as PurchaseRepository;
         const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
@@ -163,7 +163,7 @@ describe("purchaseBusiness", ()=> {
     it(`should throw error "Final data lower than initial data!"`, async () => {
         const purchaseRepository = {
             getPurchaseByDate: jest.fn(() => {
-                return [] as PurchaseInterface[]
+                return [] as PurchaseInterface[];
             }),
         } as unknown as PurchaseRepository;
         const purchaseBusiness = new PurchaseBusiness(purchaseRepository);
@@ -178,7 +178,7 @@ describe("purchaseBusiness", ()=> {
     it(`should throw error "No results found!"`, async () => {
         const purchaseRepository = {
             getPurchaseByDate: jest.fn(() => {
-                return [] as PurchaseInterface[]
+                return [] as PurchaseInterface[];
             }),
         } as unknown as PurchaseRepository;
 
