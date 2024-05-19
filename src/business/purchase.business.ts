@@ -3,7 +3,7 @@ import Purchase from "../dto/purchase.dto";
 import Purchases from "../dto/purchases.dto";
 import Order from "../dto/order.dto";
 import PurchaseRepository from "../repository/purchase.repository";
-import {Injectable} from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
 
 @Injectable()
 class PurchaseBusiness {
@@ -17,7 +17,7 @@ class PurchaseBusiness {
 
     public async getPurchaseByDate (beginDate: number, endDate: number){
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByDate(beginDate, endDate);
-        return this.createPurchaseObject(purchasesFromEntity);
+        return this.createPurchaseObject(purchasesFromEntity); //TODO Validacao de data maior e menor
     }
 
     public async getPurchaseByOrderId (orderId: number){
@@ -58,7 +58,7 @@ class PurchaseBusiness {
             })
             return purchasesListObject;
         }
-        return {}; // TODO Adicionar mensagem de feedback
+        throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
     }
 
     /** Auxiliary method to create the first purchase that is not in the resultant object to return
@@ -74,6 +74,11 @@ class PurchaseBusiness {
         return initialPurchase;
     }
 
+    /** Auxiliary method to create an object from result of dataBase by orderId
+     *
+     * @param purchasesFromEntity is the list of results from dataBase
+     * @private
+     */
     private createPurchaseByOrderId(purchasesFromEntity : PurchaseInterface[]){
         if(purchasesFromEntity.length > 0){
             let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
@@ -91,7 +96,7 @@ class PurchaseBusiness {
             })
             return purchasesListObject;
         }
-        return {}; // TODO Adicionar mensagem de feedback
+        throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
     }
 
     /** Auxiliary method to get the principal Purchase of the list, or create a new if not exists

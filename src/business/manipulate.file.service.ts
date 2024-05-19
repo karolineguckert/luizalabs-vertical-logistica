@@ -1,4 +1,4 @@
-import {Injectable} from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import PurchaseBusiness from "./purchase.business";
 
 @Injectable()
@@ -43,7 +43,7 @@ class ManipulateFileService {
                 await this.purchaseBusiness.createPurchase(initialPurchase);
             }
         })
-        return ""; // TODO incluir mensagem de finalização do carregamento do arquivo
+        throw new HttpException("Records added successfully!", HttpStatus.OK);
     }
 
 

@@ -1,12 +1,14 @@
-import {Controller, Get, Param, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
+import {Controller, Get, HttpException, HttpStatus, Param, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
 import PurchaseBusiness from "../business/purchase.business";
 import {FileInterceptor} from "@nestjs/platform-express";
 import { Express } from 'express'
 import ManipulateFileService from "../business/manipulate.file.service";
+
 @Controller('purchases')
 export class PurchaseController {
 
-    constructor(private purchaseBusiness: PurchaseBusiness, private manipulateFileService: ManipulateFileService) {
+    constructor(private purchaseBusiness: PurchaseBusiness,
+                private manipulateFileService: ManipulateFileService) {
     }
     @Get('/orders')
     public async getAllPurchases() {
@@ -27,14 +29,12 @@ export class PurchaseController {
     @Post('/')
     @UseInterceptors(FileInterceptor('file'))
     public async createPurchases(@UploadedFile() file: Express.Multer.File){
-        //TODO Adicionar mensagem de erro
         if(file){
             const contentOfFile = file.buffer.toString();
 
             const purchase = await this.manipulateFileService.createPurchasesFromContentOfFile(contentOfFile);
             return JSON.stringify(purchase);
         }
-
-
+        throw new HttpException("The current file is empty!", HttpStatus.BAD_REQUEST);
     }
 }

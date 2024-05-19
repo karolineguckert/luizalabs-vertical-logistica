@@ -10,11 +10,5 @@ async function bootstrap() {
       },
   );
   await app.listen(3000); //TODO colocar na env a  port
-    app.useBodyParser('raw', {
-        type: (req) => {
-            // Apply to *all* requests, regardless of content type.
-            return true;
-        },
-    });
 }
 bootstrap();
