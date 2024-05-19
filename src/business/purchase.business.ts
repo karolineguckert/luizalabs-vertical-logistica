@@ -10,14 +10,24 @@ class PurchaseBusiness {
 
     constructor(private purchaseRepository: PurchaseRepository) {}
 
+    /** Method that returns all a Purchase formatted
+     */
     public async getAllPurchases (){
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getAllPurchases();
         return this.createPurchaseObject(purchasesFromEntity);
     }
 
+    /** Method that returns all a Purchase by date formatted
+     *
+     * @param beginDate is the initial date to filter
+     * @param endDate is the end date to filter
+     */
     public async getPurchaseByDate (beginDate: number, endDate: number){
+        if(beginDate > endDate){
+            throw new HttpException("Final data lower than initial data!", HttpStatus.NOT_FOUND);
+        }
         const purchasesFromEntity : PurchaseInterface[] = await this.purchaseRepository.getPurchaseByDate(beginDate, endDate);
-        return this.createPurchaseObject(purchasesFromEntity); //TODO Validacao de data maior e menor
+        return this.createPurchaseObject(purchasesFromEntity);
     }
 
     public async getPurchaseByOrderId (orderId: number){
