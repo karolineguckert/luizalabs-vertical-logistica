@@ -2,12 +2,12 @@ import Order from "./order.dto";
 
 class Purchase {
     private user_id: number;
-    private userName: string;
+    private name: string;
     private orders: Order[];
 
-    constructor(user_id: number, userName: string) {
+    constructor(user_id: number, name: string) {
         this.user_id = user_id;
-        this.userName = userName.trim();
+        this.name = name.trim();
         this.orders = [];
     }
 
