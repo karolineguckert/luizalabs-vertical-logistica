@@ -25,6 +25,7 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
 
 ## Sobre a estrutura do projeto
+![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/27b7bfa4-c02e-4e4f-acb4-4f8149102b2f)
 
 
 - **Business:** Contém as manipulações das regras de negócio e interação com o banco de dados.
