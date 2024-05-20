@@ -15,8 +15,6 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
 ### Instalação 
 - **1.** npm install
-- **2.** npm run server
-
 
 ### Sobre as rotas estabelecidas
 - **1.** GET - /purchases/ **(Lista todos os pedidos)**
