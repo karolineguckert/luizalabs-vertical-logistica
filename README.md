@@ -1,4 +1,4 @@
-# Projeto para vertical da logística
+![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/e2009f31-1791-4c84-b409-a0d64908aa4c)# Projeto para vertical da logística
 Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pelo time da vertical de logística.
 
 ### Tecnologias
@@ -7,10 +7,11 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 - Typescript
 
 ### Dependências 
-- dotenv: ^16.3.1
 - mongoose: ^7.6.3
 - ts-node: ^10.9.1
 - typescript: ^5.2.2
+- @nestjs/platform-express: ^10.0.0
+- @nestjs/cli: ^10.0.0
 
 ### Instalação 
 - **1.** npm install
