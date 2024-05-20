@@ -60,19 +60,19 @@ class PurchaseBusiness {
      * @private
      */
     private createPurchaseObject(purchasesFromEntity : PurchaseInterface[]){
-        if(purchasesFromEntity.length > 0) { // TODO: inverter a logica talvez, if len === 0 throw
-            let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
-
-            purchasesFromEntity.map(purchaseFromEntity => {
-                let purchase = this.getCurrentPurchaseFromList(purchasesListObject, purchaseFromEntity);
-                let order = this.getCurrentOrderFromPurchase(purchase, purchaseFromEntity);
-
-                order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
-
-            })
-            return purchasesListObject;
+        if(purchasesFromEntity.length === 0) {
+            throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
         }
-        throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
+
+        let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
+        purchasesFromEntity.map(purchaseFromEntity => {
+            let purchase = this.getCurrentPurchaseFromList(purchasesListObject, purchaseFromEntity);
+            let order = this.getCurrentOrderFromPurchase(purchase, purchaseFromEntity);
+
+            order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
+
+        })
+        return purchasesListObject;
     }
 
     /** Auxiliary method to create the first purchase that is not in the resultant object to return
@@ -94,23 +94,23 @@ class PurchaseBusiness {
      * @private
      */
     private createPurchaseByOrderId(purchasesFromEntity : PurchaseInterface[]){
-        if(purchasesFromEntity.length > 0){ // TODO: inverter a logica talvez, if len === 0 throw
-            let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
-
-            purchasesFromEntity.map(purchaseFromEntity => {
-                let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
-
-                if(purchase){
-                    let order = purchase.getOrder(purchaseFromEntity.orderId);
-
-                    if(order){
-                        order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
-                    }
-                }
-            })
-            return purchasesListObject;
+        if(purchasesFromEntity.length === 0){
+            throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
         }
-        throw new HttpException("No results found!", HttpStatus.NOT_FOUND);
+
+        let purchasesListObject: Purchases = new Purchases(this.createFirstPurchase(purchasesFromEntity));
+        purchasesFromEntity.map(purchaseFromEntity => {
+            let purchase = purchasesListObject.getPurchase(purchaseFromEntity.userId);
+
+            if(purchase){
+                let order = purchase.getOrder(purchaseFromEntity.orderId);
+
+                if(order){
+                    order.addProduct(purchaseFromEntity.productId, purchaseFromEntity.value);
+                }
+            }
+        })
+        return purchasesListObject;
     }
 
     /** Auxiliary method to get the principal Purchase of the list, or create a new if not exists

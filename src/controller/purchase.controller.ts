@@ -32,12 +32,12 @@ export class PurchaseController {
     @Post('/')
     @UseInterceptors(FileInterceptor('file'))
     public async createPurchases(@UploadedFile() file: Express.Multer.File){
-        if(file){ // TODO: inverter a logica talvez, if not file then throw
-            const contentOfFile = file.buffer.toString();
-
-            const purchase = await this.manipulateFileService.createPurchasesFromContentOfFile(contentOfFile);
-            return JSON.stringify(purchase); // TODO ver os JSON.
+        if(!file){
+            throw new HttpException("The current file is empty!", HttpStatus.BAD_REQUEST);
         }
-        throw new HttpException("The current file is empty!", HttpStatus.BAD_REQUEST);
+        const contentOfFile = file.buffer.toString();
+
+        const purchase = await this.manipulateFileService.createPurchasesFromContentOfFile(contentOfFile);
+        return JSON.stringify(purchase); // TODO ver os JSON.
     }
 }
