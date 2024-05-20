@@ -1,28 +1,9 @@
 import PurchaseInterface from "../entity/purchase.entity";
-import PurchaseRepository from "../repository/purchase.repository";
 import PurchaseBusiness from "../business/purchase.business";
 import {PurchaseController} from "./purchase.controller";
 import ManipulateFileService from "../business/manipulate.file.service";
 
 describe("purchaseController", ()=> {
-    const purchase = [
-        {
-            userId: 70,
-            userName: "Palmer Prosacco",
-            orderId: 753,
-            productId: 3,
-            value: 1836.74,
-            date: 20210308,
-        },
-        {
-            userId: 71,
-            userName: "Alan Prosacco",
-            orderId: 754,
-            productId: 5,
-            value: 16.74,
-            date: 20210208,
-        }
-    ] as PurchaseInterface[]
 
     const resultOfPurchaseAll = {
         purchases: [
@@ -232,6 +213,6 @@ describe("purchaseController", ()=> {
             }
         } as unknown as Express.Multer.File;
         const result = await purchaseController.createPurchases(file);
-        expect(result).toBe(JSON.stringify(resultOfPalmer));
+        expect(result).toBe(resultOfPalmer);
     });
 })

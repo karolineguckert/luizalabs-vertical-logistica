@@ -13,20 +13,17 @@ export class PurchaseController {
 
     @Get('/orders')
     public async getAllPurchases() {
-        const purchases = await this.purchaseBusiness.getAllPurchases();
-        return JSON.parse(JSON.stringify(purchases)); // TODO ver os JSON.
+        return this.purchaseBusiness.getAllPurchases();
     }
 
     @Get('/orders/:orderId')
     public async getPurchaseByOrderId(@Param('orderId') orderId: number) {
-        const purchase = await this.purchaseBusiness.getPurchaseByOrderId(orderId);
-        return JSON.parse(JSON.stringify(purchase)); // TODO ver os JSON.
+        return this.purchaseBusiness.getPurchaseByOrderId(orderId);
     }
 
     @Get('/orders/:beginDate/:endDate')
     public async getPurchaseByDate(@Param('beginDate') beginDate: number, @Param('endDate') endDate: number){
-        const purchases = await this.purchaseBusiness.getPurchaseByDate(beginDate, endDate);
-        return JSON.parse(JSON.stringify(purchases)); // TODO ver os JSON.
+        return this.purchaseBusiness.getPurchaseByDate(beginDate, endDate);
     }
 
     @Post('/')
@@ -37,7 +34,6 @@ export class PurchaseController {
         }
         const contentOfFile = file.buffer.toString();
 
-        const purchase = await this.manipulateFileService.createPurchasesFromContentOfFile(contentOfFile);
-        return JSON.stringify(purchase); // TODO ver os JSON.
+        return this.manipulateFileService.createPurchasesFromContentOfFile(contentOfFile);
     }
 }
