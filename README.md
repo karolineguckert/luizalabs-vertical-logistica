@@ -31,7 +31,8 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
 
 - **Business:** Contém as manipulações das regras de negócio e interação com o banco de dados.
-  
+  ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/57164d34-2755-4c18-a087-562dabab7d55)
+
   
 - **DTO:** Contém os objetos auxiliares criados para as manipulações no projeto.
 
