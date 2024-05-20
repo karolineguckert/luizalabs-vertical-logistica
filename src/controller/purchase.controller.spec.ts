@@ -215,16 +215,23 @@ describe("purchaseController", ()=> {
         }
     })
 
-    // it("should create a purchase", async () => {
-    //     const purchaseBusiness = {
-    //         createPurchasesFromContentOfFile: jest.fn(() => {
-    //             return resultOfPalmer;
-    //         }),
-    //     } as unknown as PurchaseBusiness;
-    //
-    //     const purchaseController = new PurchaseController(purchaseBusiness, manipulateFileService);
-    //     const file = readFile('./testCreatePurchase.txt')
-    //     const result = await purchaseController.createPurchases(file);
-    //     expect(result).toBe(resultOfPalmer);
-    // });
+    it("should create a purchase", async () => {
+        const manipulateServiceCreate = {
+            createPurchasesFromContentOfFile: jest.fn(() => {
+                return resultOfPalmer
+            }),
+        } as unknown as ManipulateFileService;
+        const purchaseBusiness = {} as unknown as PurchaseBusiness;
+        const purchaseController = new PurchaseController(purchaseBusiness, manipulateServiceCreate);
+
+        const file = {
+            buffer: {
+                toString: jest.fn(() => {
+                    return "0000000070                              Palmer Prosacco00000007530000000003     1836.7420210308"
+                }),
+            }
+        } as unknown as Express.Multer.File;
+        const result = await purchaseController.createPurchases(file);
+        expect(result).toBe(JSON.stringify(resultOfPalmer));
+    });
 })
