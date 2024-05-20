@@ -8,8 +8,7 @@ export class MongoConfig {
   }
 
   public async createMongoConnection () {
-    //TODO: Colocar host e port na env também
     //TODO: Colocar a database na url
-    return mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASSWORD}@localhost:27018`)
+    return mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.MONGO_PORT}`)
   }
 }

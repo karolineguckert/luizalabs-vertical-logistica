@@ -9,6 +9,6 @@ async function bootstrap() {
         rawBody: true,
       },
   );
-  await app.listen(3000); //TODO colocar na env a  port
+  await app.listen(process.env.SERVER_PORT);
 }
 bootstrap();
