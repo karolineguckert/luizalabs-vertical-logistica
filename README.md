@@ -48,7 +48,9 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
   ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/470e929d-f784-475c-94b7-b32397f16ed5)
 
 
-- **Routes:** Contém a definição de todas as rotas estabelecidas para o projeto.
+- **Controller:** Contém a definição de todas as rotas estabelecidas para o projeto.
+  
+  ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/7c86ca04-a1c1-4914-bd07-01702609597c)
 
 
 - **Scripts:** Contém o script que inicia o server do projeto e a conexão com o banco de dados.
