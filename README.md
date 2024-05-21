@@ -18,7 +18,13 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
 ### Para rodar o projeto
 - **1.** npm run dev
+  
+### Para rodar o teste do projeto
+- **1.** npm run test
 
+### Para rodar o lint do projeto
+- **1.** npm run lint
+  
 ### Sobre as rotas estabelecidas
 - **1.** GET - /purchases/ **(Lista todos os pedidos)**
 - **2.** GET - /purchases/orders/{orderId} **(Lista o pedido do código fornecido)**
