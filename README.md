@@ -35,11 +35,12 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
   
 - **DTO:** Contém os objetos auxiliares criados para as manipulações no projeto.
-  ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/c48109e1-1277-4eca-8e2b-457749404865)
 
+  ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/c48109e1-1277-4eca-8e2b-457749404865)
 
   
 - **Entity:** Contém a criação da entidade do banco de dados.
+
   ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/82bbf6af-e3da-4259-8ce3-9b462e2eccb2)
 
 
