@@ -21,6 +21,8 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
   
 ### Para rodar o teste do projeto
 - **1.** npm run test
+![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/af987ac0-1028-4bff-9dff-2e5150b01e9e)
+
 
 ### Para rodar o lint do projeto
 - **1.** npm run lint
