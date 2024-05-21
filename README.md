@@ -53,5 +53,5 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
   ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/7c86ca04-a1c1-4914-bd07-01702609597c)
 
 
-- **Scripts:** Contém o script que inicia o server do projeto e a conexão com o banco de dados.
-- **Service:** Contém o service auxiliar para a conexão com o banco de dados.
+- **Config e main:** Contém o iniciamento do server do projeto e a conexão com o banco de dados.
+
