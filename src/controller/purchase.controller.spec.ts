@@ -253,4 +253,24 @@ describe("purchaseController", () => {
     const result = await purchaseController.createPurchases(file);
     expect(result).toBe(resultOfPalmer);
   });
+
+  it('should throw "The current file is empty!"', async () => {
+    const manipulateServiceCreate = {
+      createPurchasesFromContentOfFile: jest.fn(() => {
+        return null;
+      }),
+    } as unknown as ManipulateFileService;
+
+    const purchaseBusiness = {} as unknown as PurchaseBusiness;
+    const purchaseController = new PurchaseController(
+        purchaseBusiness,
+        manipulateServiceCreate,
+    );
+
+    try {
+      await purchaseController.createPurchases(null);
+    } catch (e: any) {
+      expect(e.message).toBe("The current file is empty!");
+    }
+  });
 });
