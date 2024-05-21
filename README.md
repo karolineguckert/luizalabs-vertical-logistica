@@ -43,10 +43,10 @@ Esse projeto foi desenvolvido com objetivo de cumprir com o desafio proposto pel
 
   ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/82bbf6af-e3da-4259-8ce3-9b462e2eccb2)
 
-
-
 - **Repository:** Contém as querys relacionadas a tabela criada para o projeto.
   
+  ![image](https://github.com/karolineguckert/luizalabs-vertical-logistica/assets/60297870/470e929d-f784-475c-94b7-b32397f16ed5)
+
 
 - **Routes:** Contém a definição de todas as rotas estabelecidas para o projeto.
 
